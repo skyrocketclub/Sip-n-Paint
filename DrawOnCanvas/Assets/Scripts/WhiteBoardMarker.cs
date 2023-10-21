@@ -6,7 +6,8 @@ using System.Linq;
 public class WhiteBoardMarker : MonoBehaviour
 {
     [SerializeField] private Transform _tip;
-    [SerializeField] private int _penSize = 5;
+    [SerializeField] private int _penSize = 15;
+    [SerializeField] private float _tipHeightModifier = 0.5f;
 
     private Renderer _renderer;
     private Color[] _colors;
@@ -23,9 +24,11 @@ public class WhiteBoardMarker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _renderer = _tip.GetComponent<Renderer>();
+        _renderer = _tip.GetComponent<Renderer>(); //We get access to the color here...
+        //Using the geometry of length times width to get the pixels that do the actual painting
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
-        _tipHeight = _tip.localScale.y;
+        //to help check if the tip is touching the whiteboard
+        _tipHeight = _tip.localScale.y - _tipHeightModifier ;
     }
 
     // Update is called once per frame
@@ -45,6 +48,8 @@ public class WhiteBoardMarker : MonoBehaviour
                 {
                     _whiteboard = _touch.transform.GetComponent<WhiteBoard>();
                 }
+
+                //Getting the touch position where we touched the whiteboard
                 _touchPos = new Vector2(_touch.textureCoord.x, _touch.textureCoord.y);
 
                 //detecting the position of contact
@@ -58,9 +63,10 @@ public class WhiteBoardMarker : MonoBehaviour
 
                 if (_touchedLastFrame)
                 {
+                    //Actual drawing
                     _whiteboard.texture.SetPixels(x, y, _penSize, _penSize, _colors);
                     
-                    //Interpolation
+                    //Interpolation incase we move our hands very fast...
                     for(float f = 0.01f; f <1.00f; f+= 0.01f)
                     {
                         var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
