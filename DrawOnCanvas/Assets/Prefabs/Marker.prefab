@@ -414,8 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tip: {fileID: 4008830986631751341}
-  _penSize: 15
-  _tipHeightModifier: 0.17
+  _penSize: 10
+  _tipHeightModifier: 0.19
 --- !u!54 &3092732180315120080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -440,9 +440,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1862002495476961013
 MonoBehaviour:
   m_ObjectHideFlags: 0

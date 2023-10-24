@@ -6,8 +6,8 @@ using System.Linq;
 public class WhiteBoardMarker : MonoBehaviour
 {
     [SerializeField] private Transform _tip;
-    [SerializeField] private int _penSize = 15;
-    [SerializeField] private float _tipHeightModifier = 0.5f;
+    [SerializeField] private int _penSize = 10;
+    [SerializeField] private float _tipHeightModifier = 0.9f;
 
     private Renderer _renderer;
     private Color[] _colors;
